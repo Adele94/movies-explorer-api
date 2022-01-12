@@ -20,10 +20,6 @@ module.exports = (req, res, next) => {
 
   try {
     // попытаемся верифицировать токен
-    console.log(JWT_SECRET);
-    console.log(JWT_DEV_TOKEN);
-    console.log(token);
-
     payload = jwt.verify(token, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV_TOKEN);
     console.log('\x1b[31m%s\x1b[0m', `
     Надо исправить. В продакшне используется тот же

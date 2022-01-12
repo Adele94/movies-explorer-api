@@ -8,8 +8,25 @@ const getMovies = (req, res, next) => Movie.find({})
   .catch(next);
 
 const createMovie = (req, res, next) => {
+  const {
+    country, director, duration, year, description, image, trailer, thumbnail,
+    movieId, nameRU, nameEN,
+  } = req.body;
   const owner = req.user._id;
-  Movie.create(req.body)
+  Movie.create({
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailer,
+    thumbnail,
+    owner,
+    movieId,
+    nameRU,
+    nameEN,
+  })
     .then((movie) => res.status(201).send(movie))
     // данные не записались, вернём ошибку
     .catch((err) => {

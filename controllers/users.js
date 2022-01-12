@@ -99,10 +99,7 @@ const login = (req, res, next) => {
   findUserByCredentials(req.body.email, req.body.password)
     .then((user) => {
       // создадим токен
-      console.log('user._id', user._id);
-      console.log('NODE_ENV', NODE_ENV);
       const token = jwt.sign({ _id: user._id }, NODE_ENV === 'production' ? JWT_SECRET : JWT_DEV_TOKEN, { expiresIn: '7d' });
-      console.log('token', token);
       res.send({ token });
     })
     .catch(next);
