@@ -11,4 +11,4 @@ router.use(auth, routesMovie);
 
 router.use('*', () => { throw new NotFoundError('Ресурс не найден'); });
 
-module.exports = { router };
+module.exports = router;
