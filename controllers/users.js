@@ -39,6 +39,9 @@ const updateUser = (req, res, next) => {
       res.status(200).send({ data: user });
     })
     .catch((err) => {
+      if (err.code === 11000) {
+        next(new ConflictError('Пользователем с таким email уже существует'));
+      }
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении пользователя'));
       } else {
