@@ -41,8 +41,9 @@ const updateUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные при обновлении пользователя'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -68,8 +69,9 @@ const createUser = (req, res, next) => {
       }
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при создании пользователя'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 

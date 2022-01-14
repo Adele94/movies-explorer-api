@@ -16,7 +16,7 @@ const EmailAndPasswordValidation = celebrate({
 
 const SignUpValidation = celebrate({
   [Segments.BODY]: Joi.object().keys({
-    name: Joi.string().min(2).max(30),
+    name: Joi.string().min(2).max(30).required(),
     email: Joi.string().email()
       .custom((value, helpers) => {
         if (validator.isEmail(value)) {
@@ -43,7 +43,7 @@ const NameAndEmailValidation = celebrate({
 
 const MovieIdValidation = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
-    movieId: Joi.string().required(),
+    movieId: Joi.string().hex().length(24).required(),
   }),
 });
 
@@ -75,8 +75,7 @@ const MovieValidation = celebrate({
         }
         return helpers.message('Не соответсвует формату ссылки');
       }),
-    owner: Joi.string(),
-    movieId: Joi.string().required(),
+    movieId: Joi.string().hex().length(24).required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),

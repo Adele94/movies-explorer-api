@@ -5,7 +5,7 @@
 
 **Ссылка на api сервера размещенный на Яндекс.Облаке**
 
-* [Ссылка на api сервера](https://http://api.movies.adelnabiullina.nomoredomains.rocks/)
+* [Ссылка на api сервера](https://api.movies.adelnabiullina.nomoredomains.rocks/)
 
 **Публичный  api адрес**
 51.250.2.236

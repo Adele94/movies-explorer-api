@@ -32,8 +32,9 @@ const createMovie = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные при создании фильма'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 
@@ -49,8 +50,9 @@ const deleteMovie = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'CastError') {
         next(new BadRequestError('Переданы некорректные данные при удалении фильма'));
+      } else {
+        next(err);
       }
-      next(err);
     });
 };
 

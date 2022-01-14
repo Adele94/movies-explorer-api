@@ -1,5 +1,4 @@
-const router = require('express').Router();
-const { getProfile, updateUser } = require('../controllers/users');
+cconst { getProfile, updateUser } = require('../controllers/users');
 const { NameAndEmailValidation } = require('../middlewares/validation');
 
 router.get('/users/me', getProfile); // возвращает информацию о текущем пользователе (email и имя)

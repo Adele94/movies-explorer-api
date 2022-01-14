@@ -1,36 +1,34 @@
 require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
+const { errors } = require('celebrate');
 const helmet = require('helmet');
-const { routesUser, routesMovie, routesAuth } = require('./routes/index');
+const { routes } = require('./routes/index');
 const { limiter } = require('./config/constants');
-const auth = require('./middlewares/auth');
 const errorHandler = require('./middlewares/errorHandler');
 const cors = require('./middlewares/cors');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const { NotFoundError } = require('./errors/NotFoundError');
+const { MONGODB_URL } = require('./config/index');
 
 const app = express();
 
 // подключаемся к серверу mongo
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
+mongoose.connect(MONGODB_URL, {
   useNewUrlParser: true,
-}).then(() => console.log('Connection Successful'))
-  .catch((err) => console.log(err));
+});
 
+app.use(requestLogger); // подключаем логгер запросов
 app.use(limiter);
 app.use(helmet());
-app.use(requestLogger); // подключаем логгер запросов
 app.use(cors);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(routesAuth);
-app.use(auth, routesUser);
-app.use(auth, routesMovie);
-app.use('*', () => { throw new NotFoundError('Ресурс не найден'); });
+app.use(routes);
 
 app.use(errorLogger); // подключаем логгер ошибок
 
+// обработчики ошибок
+app.use(errors()); // обработчик ошибок celebrate
 // здесь централизованно обрабатываем все ошибки
 app.use(errorHandler);
 
