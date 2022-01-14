@@ -43,7 +43,7 @@ const NameAndEmailValidation = celebrate({
 
 const MovieIdValidation = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
-    movieId: Joi.string().hex().length(24).required(),
+    movieId: Joi.string().hex().required(),
   }),
 });
 
@@ -75,7 +75,7 @@ const MovieValidation = celebrate({
         }
         return helpers.message('Не соответсвует формату ссылки');
       }),
-    movieId: Joi.string().hex().length(24).required(),
+    movieId: Joi.string().hex().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
