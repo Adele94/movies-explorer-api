@@ -43,7 +43,7 @@ const NameAndEmailValidation = celebrate({
 
 const MovieIdValidation = celebrate({
   [Segments.PARAMS]: Joi.object().keys({
-    movieId: Joi.string().hex().required(),
+    movieId: Joi.string().hex().length(24).required(),
   }),
 });
 
