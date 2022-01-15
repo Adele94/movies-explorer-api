@@ -3,13 +3,7 @@ const { celebrate, Joi, Segments } = require('celebrate');
 
 const EmailAndPasswordValidation = celebrate({
   [Segments.BODY]: Joi.object().keys({
-    email: Joi.string().email()
-      .custom((value, helpers) => {
-        if (validator.isEmail(value)) {
-          return value;
-        }
-        return helpers.message('Не соответсвует формату почты');
-      }).required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 });
@@ -17,13 +11,7 @@ const EmailAndPasswordValidation = celebrate({
 const SignUpValidation = celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    email: Joi.string().email()
-      .custom((value, helpers) => {
-        if (validator.isEmail(value)) {
-          return value;
-        }
-        return helpers.message('Не соответсвует формату почты');
-      }).required(),
+    email: Joi.string().email().required(),
     password: Joi.string().required(),
   }),
 });
@@ -31,13 +19,7 @@ const SignUpValidation = celebrate({
 const NameAndEmailValidation = celebrate({
   [Segments.BODY]: Joi.object().keys({
     name: Joi.string().min(2).max(30).required(),
-    email: Joi.string().email()
-      .custom((value, helpers) => {
-        if (validator.isEmail(value)) {
-          return value;
-        }
-        return helpers.message('Не соответсвует формату почты');
-      }).required(),
+    email: Joi.string().email().required(),
   }),
 });
 
@@ -54,28 +36,10 @@ const MovieValidation = celebrate({
     duration: Joi.number().required(),
     year: Joi.string().required(),
     description: Joi.string().required(),
-    image: Joi.string().required()
-      .custom((value, helpers) => {
-        if (validator.isURL(value, { require_protocol: true })) {
-          return value;
-        }
-        return helpers.message('Не соответсвует формату ссылки');
-      }),
-    trailer: Joi.string().required()
-      .custom((value, helpers) => {
-        if (validator.isURL(value, { require_protocol: true })) {
-          return value;
-        }
-        return helpers.message('Не соответсвует формату ссылки');
-      }),
-    thumbnail: Joi.string().required()
-      .custom((value, helpers) => {
-        if (validator.isURL(value, { require_protocol: true })) {
-          return value;
-        }
-        return helpers.message('Не соответсвует формату ссылки');
-      }),
-    movieId: Joi.string().hex().required(),
+    image: Joi.string().required(),
+    trailer: Joi.string().required(),
+    thumbnail: Joi.string().required(),
+    movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
   }),
