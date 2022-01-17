@@ -8,4 +8,4 @@
 * [Ссылка на api сервера](https://api.movies.adelnabiullina.nomoredomains.rocks/)
 
 **Публичный  api адрес**
-51.250.2.236
+84.201.133.123
